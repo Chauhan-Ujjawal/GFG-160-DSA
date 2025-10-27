@@ -1,32 +1,29 @@
+/*
+class Node {
+    int data;
+    Node left, right;
+
+    public Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+*/
+
 class Solution {
+    public static void helper(ArrayList<Integer> list,Node root){
+        if(root==null) return;
+        if(root!=null) list.add(root.data);
+        helper( list,root.left);
+        helper(list,root.right);
+    }
     public int kthSmallest(Node root, int k) {
         if(root==null) return -1;
         ArrayList<Integer> list = new ArrayList<>();
-        Node current = root ;
-        while(current!=null){
-            if(current.left==null){
-                //then add current and move right
-                list.add(current.data);
-                current=current.right;
-            }
-            else{
-                Node runner = current.left ;
-                while(runner.right!=null && runner.right!=current){
-                    runner=runner.right;
-                }
-                if(runner.right==null){
-                    runner.right=current;
-                    current=current.left;
-                }
-                else{
-                    runner.right=null;
-                    list.add(current.data);
-                    current=current.right;
-                }
-            }
-            
-        }
-        if(k > list.size()) return -1;
+        helper(list,root);
+        Collections.sort(list);
+        if(k>list.size()) return -1;
         return list.get(k-1);
     }
 }
