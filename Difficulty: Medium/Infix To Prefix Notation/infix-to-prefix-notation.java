@@ -1,9 +1,5 @@
-
-
 class Solution {
-
-    // Step 1: Define precedence function
-    static int precedence(char c) {
+     static int precedence(char c) {
         if (c == '^') return 3;
         else if (c == '*' || c == '/') return 2;
         else if (c == '+' || c == '-') return 1;
@@ -59,7 +55,5 @@ class Solution {
         // reverse to get correct prefix
         return result.reverse().toString();
     }
-
-
 
 }
